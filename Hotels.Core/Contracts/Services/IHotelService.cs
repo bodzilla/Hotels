@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using Hotels.Core.Models;
 
-namespace Hotels.Core.Contracts.Repositories
+namespace Hotels.Core.Contracts.Services
 {
     /// <summary>
-    /// The hotel repository interface.
+    /// The hotel service interface.
     /// </summary>
-    public interface IHotelRepository
+    public interface IHotelService
     {
         /// <summary>
         /// Get all active <see cref="Hotel"/>s.
