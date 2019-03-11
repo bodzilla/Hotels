@@ -2,8 +2,6 @@
   "hotels": [
     {
       "id": 1,
-      "entityCreated": "2019-03-11T01:00:00.000Z",
-      "entityActive": "true",
       "name": "Hotel Paradise",
       "description": "The best hotel.",
       "location": "London",
@@ -11,8 +9,6 @@
     },
     {
       "id": 2,
-      "entityCreated": "2019-03-11T02:00:00.000Z",
-      "entityActive": "true",
       "name": "Beard Hotel",
       "description": "A hotel only for people with beards.",
       "location": "London",
@@ -20,8 +16,6 @@
     },
     {
       "id": 3,
-      "entityCreated": "2019-03-11T03:00:00.000Z",
-      "entityActive": "true",
       "name": "Rubber Chicken Hotel",
       "description": "In this hotel, you must wear a rubber chicken suit at all times.",
       "location": "Ipswich",

@@ -1,5 +1,4 @@
-﻿using System;
-using Hotels.Core.Contracts;
+﻿using Hotels.Core.Contracts;
 using Hotels.Core.Enums;
 
 namespace Hotels.Core.Models
@@ -12,12 +11,6 @@ namespace Hotels.Core.Models
     {
         /// <inheritdoc />
         public int Id { get; set; }
-
-        /// <inheritdoc />
-        public DateTime EntityCreated { get; set; }
-
-        /// <inheritdoc />
-        public bool EntityActive { get; set; }
 
         /// <summary>
         /// The hotel name.

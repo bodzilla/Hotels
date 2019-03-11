@@ -17,7 +17,7 @@ namespace Hotels.Core.Services
         public HotelService(IHotelRepository hotelRepository) => _hotelRepository = hotelRepository;
 
         /// <inheritdoc />
-        public async Task<IEnumerable<Hotel>> GetAllActiveAsync() => await _hotelRepository.GetAllActiveAsync();
+        public async Task<IEnumerable<Hotel>> GetAllAsync() => await _hotelRepository.GetAllActiveAsync();
 
         /// <inheritdoc />
         public async Task<Hotel> GetByIdAsync(int id) => await _hotelRepository.GetByIdAsync(id);

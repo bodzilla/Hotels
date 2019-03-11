@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,14 +20,15 @@ namespace Hotels.Persistence.Repositories
         public HotelRepository(string dataSource) => Hotels = JObject.Parse(File.ReadAllText(dataSource))["hotels"].ToList();
 
         /// <inheritdoc />
-        public async Task<IEnumerable<Hotel>> GetAllActiveAsync() => await Task.Run(() => Hotels.Select(x => x.ToObject<Hotel>()).ToList());
+        public async Task<IEnumerable<Hotel>> GetAllActiveAsync() =>
+            await Task.Run(() => Hotels.Select(x => x.ToObject<Hotel>()));
 
         /// <inheritdoc />
         public async Task<Hotel> GetByIdAsync(int id) =>
-            await Task.Run(() => Hotels.Select(x => x.ToObject<Hotel>()).ToList().FirstOrDefault(x => x.Id == id));
+            await GetAllActiveAsync().ContinueWith(x => x.Result.FirstOrDefault(y => y.Id == id));
 
         /// <inheritdoc />
         public async Task<IEnumerable<Hotel>> GetListByMatch(string name) =>
-            await Task.Run(() => Hotels.Select(x => x.ToObject<Hotel>()).Where(x => x.Name.Contains(name)).ToList());
+            await GetAllActiveAsync().ContinueWith(x => x.Result.Where(y => y.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase)).ToList());
     }
 }

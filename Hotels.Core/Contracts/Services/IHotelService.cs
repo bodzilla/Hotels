@@ -13,7 +13,7 @@ namespace Hotels.Core.Contracts.Services
         /// Get all active <see cref="Hotel"/>s.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<Hotel>> GetAllActiveAsync();
+        Task<IEnumerable<Hotel>> GetAllAsync();
 
         /// <summary>
         /// Get <see cref="Hotel"/> by id.
