@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\Hotels.Core\Hotels.Core.csproj" />
   </ItemGroup>
 
 </Project>
