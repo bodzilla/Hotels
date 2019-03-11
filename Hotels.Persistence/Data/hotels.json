@@ -2,23 +2,37 @@
   "hotels": [
     {
       "id": 1,
-      "name": "Hotel Paradise",
+      "name": "Paradise Hotel",
       "description": "The best hotel.",
-      "location": "London",
+      "location": "Aldgate",
       "rating": "5"
     },
     {
       "id": 2,
       "name": "Beard Hotel",
       "description": "A hotel only for people with beards.",
-      "location": "London",
+      "location": "Harrow",
       "rating": "4"
     },
     {
       "id": 3,
       "name": "Rubber Chicken Hotel",
-      "description": "In this hotel, you must wear a rubber chicken suit at all times.",
-      "location": "Ipswich",
+      "description": "A hotel where you must wear a rubber chicken suit at all times.",
+      "location": "Enfield",
+      "rating": "1"
+    },
+    {
+      "id": 4,
+      "name": "Pirate Hotels",
+      "description": "A hotel only for pirates, arr!",
+      "location": "Southend",
+      "rating": "4"
+    },
+    {
+      "id": 5,
+      "name": "Ghost Hotel",
+      "description": "A hauntd hotel.",
+      "location": "Gravesend",
       "rating": "1"
     }
   ]
