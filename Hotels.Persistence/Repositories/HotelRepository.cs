@@ -20,15 +20,15 @@ namespace Hotels.Persistence.Repositories
         public HotelRepository(string dataSource) => Hotels = JObject.Parse(File.ReadAllText(dataSource))["hotels"].ToList();
 
         /// <inheritdoc />
-        public async Task<IEnumerable<Hotel>> GetAllActiveAsync() =>
+        public async Task<IEnumerable<Hotel>> GetAllAsync() =>
             await Task.Run(() => Hotels.Select(x => x.ToObject<Hotel>()));
 
         /// <inheritdoc />
         public async Task<Hotel> GetByIdAsync(int id) =>
-            await GetAllActiveAsync().ContinueWith(x => x.Result.FirstOrDefault(y => y.Id == id));
+            await GetAllAsync().ContinueWith(x => x.Result.FirstOrDefault(y => y.Id == id));
 
         /// <inheritdoc />
         public async Task<IEnumerable<Hotel>> GetListByMatch(string name) =>
-            await GetAllActiveAsync().ContinueWith(x => x.Result.Where(y => y.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase)).ToList());
+            await GetAllAsync().ContinueWith(x => x.Result.Where(y => y.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase)).ToList());
     }
 }

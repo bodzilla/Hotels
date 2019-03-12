@@ -37,7 +37,7 @@ namespace Hotels.UnitTests.Services
             };
 
             // Ensure this method returns the sample data.
-            _hotelRepository.Setup(x => x.GetAllActiveAsync()).ReturnsAsync(data);
+            _hotelRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(data);
 
             var result = await _hotelService.GetAllAsync();
 
