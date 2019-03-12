@@ -19,7 +19,6 @@ export class Home extends Component {
             <table className='table table-striped'>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Location</th>
@@ -29,7 +28,6 @@ export class Home extends Component {
                 <tbody>
                     {hotels.map(hotel =>
                         <tr key={hotel.id}>
-                            <td>{hotel.id}</td>
                             <td>{hotel.name}</td>
                             <td>{hotel.description}</td>
                             <td>{hotel.location}</td>
