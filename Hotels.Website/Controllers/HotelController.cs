@@ -19,7 +19,7 @@ namespace Hotels.Website.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("hotels")]
-        public async Task<IEnumerable<Hotel>> GetAllAsync() => await _hotelService.GetAllAsync();
+        public async Task<ActionResult<IEnumerable<Hotel>>> GetAllAsync() => Ok(await _hotelService.GetAllAsync());
 
         // GET: api/hotels/id
         /// <summary>
@@ -27,7 +27,7 @@ namespace Hotels.Website.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("hotels/{id}")]
-        public async Task<Hotel> GetByIdAsync(int id) => await _hotelService.GetByIdAsync(id);
+        public async Task<ActionResult<Hotel>> GetByIdAsync(int id) => Ok(await _hotelService.GetByIdAsync(id));
 
         // GET: api/hotels/name
         /// <summary>
@@ -35,6 +35,6 @@ namespace Hotels.Website.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("hotels/name/{name}")]
-        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) => await _hotelService.GetListByMatchAsync(name);
+        public async Task<ActionResult<IEnumerable<Hotel>>> GetListByMatchAsync(string name) => Ok(await _hotelService.GetListByMatchAsync(name));
     }
 }
