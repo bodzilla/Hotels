@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hotels.Website.Controllers
 {
-    [Route("api/hotels")]
+    [Route("api")]
     public class HotelController : Controller
     {
         private readonly IHotelService _hotelService;
@@ -18,7 +18,23 @@ namespace Hotels.Website.Controllers
         /// Gets all hotels.
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("hotels")]
         public async Task<IEnumerable<Hotel>> GetAllAsync() => await _hotelService.GetAllAsync();
+
+        // GET: api/hotels/id
+        /// <summary>
+        /// Gets hotel with id.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("hotels/{id}")]
+        public async Task<Hotel> GetByIdAsync(int id) => await _hotelService.GetByIdAsync(id);
+
+        // GET: api/hotels/name
+        /// <summary>
+        /// Gets list of hotels with matching name.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("hotels/name/{name}")]
+        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) => await _hotelService.GetListByMatchAsync(name);
     }
 }

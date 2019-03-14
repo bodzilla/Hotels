@@ -28,7 +28,7 @@ namespace Hotels.Persistence.Repositories
             await GetAllAsync().ContinueWith(x => x.Result.FirstOrDefault(y => y.Id == id));
 
         /// <inheritdoc />
-        public async Task<IEnumerable<Hotel>> GetListByMatch(string name) =>
+        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) =>
             await GetAllAsync().ContinueWith(x => x.Result.Where(y => y.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase)).ToList());
     }
 }

@@ -75,7 +75,7 @@ namespace Hotels.UnitTests.Services
         [TestCase("Test")]
         [TestCase("Hotel")]
         [TestCase("Name")]
-        public async Task GetListByMatchAsync_GetHotelListByMatchingNameAsync_ReturnsThreeHotels(string name)
+        public async Task GetListByMatchAsync_GetHotelListByMatchingNameAsync_ReturnsThreeMatchingHotels(string name)
         {
             // Set up sample data.
             var data = new List<Hotel>
@@ -86,9 +86,9 @@ namespace Hotels.UnitTests.Services
             };
 
             // Ensure this method returns the sample data.
-            _hotelRepository.Setup(x => x.GetListByMatch(It.IsAny<string>())).ReturnsAsync(data);
+            _hotelRepository.Setup(x => x.GetListByMatchAsync(It.IsAny<string>())).ReturnsAsync(data);
 
-            var result = await _hotelService.GetListByMatch(name);
+            var result = await _hotelService.GetListByMatchAsync(name);
 
             // Cast to list to make assertions.
             var hotels = result.ToList();

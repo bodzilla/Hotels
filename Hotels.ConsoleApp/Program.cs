@@ -13,7 +13,7 @@ namespace Hotels.ConsoleApp
 
             var allHotels = hotelService.GetAllAsync().Result;
             var hotelIdTwo = hotelService.GetByIdAsync(2).Result;
-            var hotelsWithChickenInName = hotelService.GetListByMatch("chicken").Result;
+            var hotelsWithChickenInName = hotelService.GetListByMatchAsync("chicken").Result;
         }
     }
 }

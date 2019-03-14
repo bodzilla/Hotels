@@ -23,6 +23,6 @@ namespace Hotels.Core.Services
         public async Task<Hotel> GetByIdAsync(int id) => await _hotelRepository.GetByIdAsync(id);
 
         /// <inheritdoc />
-        public async Task<IEnumerable<Hotel>> GetListByMatch(string name) => await _hotelRepository.GetListByMatch(name);
+        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) => await _hotelRepository.GetListByMatchAsync(name);
     }
 }

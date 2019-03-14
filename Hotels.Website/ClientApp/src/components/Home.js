@@ -46,7 +46,7 @@ export class Home extends Component {
 
         return (
             <div>
-                <h1>All available hotels</h1>
+                <h1>Available hotels</h1>
                 <br />
                 {contents}
             </div>

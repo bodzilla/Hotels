@@ -26,6 +26,6 @@ namespace Hotels.Core.Contracts.Repositories
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        Task<IEnumerable<Hotel>> GetListByMatch(string name);
+        Task<IEnumerable<Hotel>> GetListByMatchAsync(string name);
     }
 }
