@@ -26,8 +26,8 @@ export class Search extends Component {
 
     render() {
         let contents =
-            <form className='form-row align-items-center' onSubmit={this.handleSubmit}>
-                <div>
+            <form className='form-group' onSubmit={this.handleSubmit}>
+                <div className='form-row align-items-center'>
                     <div className='col-sm-3 my-1'>
                         <input type='text' className='form-control' value={this.state.searchTerms} onChange={this.handleChange} />
                     </div>
@@ -35,7 +35,7 @@ export class Search extends Component {
                         <input type="submit" value="Submit" className='btn btn-primary' />
                     </div>
                 </div>
-            </form>;
+            </form >;
 
         return (
             <div>
