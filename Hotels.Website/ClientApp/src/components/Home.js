@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 export class Home extends Component {
-    static displayName = Home.name;
 
     constructor(props) {
         super(props);
         this.state = { hotels: [], loading: true };
 
+        // Get the full list on initial load.
         fetch('api/hotels')
             .then(response => response.json())
             .then(data => {
@@ -14,6 +14,7 @@ export class Home extends Component {
             });
     }
 
+    // Render the current hotel array to the screen.
     static renderHotelsTable(hotels) {
         return (
             <table className='table table-striped'>
@@ -40,9 +41,7 @@ export class Home extends Component {
     }
 
     render() {
-        let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : Home.renderHotelsTable(this.state.hotels);
+        let contents = this.state.loading ? <p><em>Loading...</em></p> : Home.renderHotelsTable(this.state.hotels);
 
         return (
             <div>

@@ -2,12 +2,34 @@ import React, { Component } from 'react';
 
 export class Search extends Component {
 
-    static displayName = Search.name;
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchTerms: "",
+            rating: "",
+            ratingSort: "",
+            hotels: []
+        };
 
-    handleChange(event) {
+        // Bind all elements.
+        this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.handleRatingFilterChange = this.handleRatingFilterChange.bind(this);
+        this.handleRatingSortChange = this.handleRatingSortChange.bind(this);
+
+        // Get the full list on initial load.
+        fetch('api/hotels')
+            .then(response => response.json())
+            .then(data => { this.setState({ hotels: data }); });
+    }
+
+    // Get hotels with given search criteria.
+    handleSearchChange(event) {
+        // Set / clear other fields.
         this.setState({ searchTerms: event.target.value });
         this.setState({ rating: 0 });
+        this.setState({ ratingSort: 0 });
 
+        // If the value is empty, return all hotels, otherwise search the given terms.
         if (!event.target.value) {
             fetch('api/hotels')
                 .then(response => response.json())
@@ -23,18 +45,41 @@ export class Search extends Component {
         event.preventDefault();
     }
 
-    handleRatingChange(event) {
+    handleRatingFilterChange(event) {
+        // Set / clear other fields.
         this.setState({ rating: event.target.value });
         this.setState({ searchTerms: "" });
-        if (event.target.value !== "0") {
-            fetch(`api/hotels/rating/${event.target.value}`)
-                .then(response => response.json())
-                .then(data => { this.setState({ hotels: data }); }
-                );
-        }
+        this.setState({ ratingSort: 0 });
+
+        fetch(`api/hotels/rating/${event.target.value}`)
+            .then(response => response.json())
+            .then(data => { this.setState({ hotels: data }); }
+            );
+
         event.preventDefault();
     }
 
+    // Sort the current data set by given mode.
+    handleRatingSortChange(event) {
+        // Set / clear other fields.
+        this.setState({ ratingSort: event.target.value });
+        this.setState({ rating: 0 });
+
+        if (event.target.value === "1") {
+            // Ascending.
+            this.setState({
+                hotels: this.state.hotels.sort((a, b) => (a.rating - b.rating)).reverse()
+            });
+        } else if (event.target.value === "2") {
+            // Descending.
+            this.setState({
+                hotels: this.state.hotels.sort((a, b) => (a.rating - b.rating))
+            });
+            event.preventDefault();
+        }
+    }
+
+    // Render the current hotel array to the screen.
     static renderHotelsTable(hotels) {
         return (
             <table className='table table-striped'>
@@ -60,34 +105,18 @@ export class Search extends Component {
         );
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            searchTerms: "",
-            rating: "",
-            hotels: []
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleRatingChange = this.handleRatingChange.bind(this);
-
-        fetch('api/hotels')
-            .then(response => response.json())
-            .then(data => { this.setState({ hotels: data }); });
-    }
-
     render() {
         let contents =
-            <form className='form-group' onSubmit={this.handleSubmit}>
+            <div className='form-group'>
                 <div className='form-row align-items-center'>
                     <div className='col-sm-3 my-2'>
-                        <input type='text' className='form-control' placeholder='Search' value={this.state.searchTerms} onChange={this.handleChange} />
+                        <input type='text' className='form-control' placeholder='Search' value={this.state.searchTerms} onChange={this.handleSearchChange} />
                     </div>
                 </div>
                 <div className='form-row align-items-center'>
-                    <div className='dropdown col-sm-2 my-2'>
-                        <select className='form-control' value={this.state.rating} onChange={this.handleRatingChange}>
-                            <option value="0">Filter by rating</option>
+                    <div className='dropdown col-auto my-2'>
+                        <select className='form-control' value={this.state.rating} onChange={this.handleRatingFilterChange}>
+                            <option hidden>Filter by rating</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -95,8 +124,15 @@ export class Search extends Component {
                             <option value="5">5</option>
                         </select>
                     </div>
+                    <div className='dropdown col-auto my-2'>
+                        <select className='form-control' value={this.state.ratingSort} onChange={this.handleRatingSortChange}>
+                            <option hidden>Order by rating</option>
+                            <option value="1">Highest first</option>
+                            <option value="2">Lowest first</option>
+                        </select>
+                    </div>
                 </div>
-            </form >;
+            </div>;
 
         let table = Search.renderHotelsTable(this.state.hotels);
 
