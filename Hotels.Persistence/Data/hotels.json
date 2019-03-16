@@ -69,6 +69,76 @@
       "description": "A very tall hotel, but nothing inside it.",
       "location": "Moorgate",
       "rating": "1"
+    },
+    {
+      "id": 11,
+      "name": "Football Mania Hotel",
+      "description": "A hotel for football fanatics.",
+      "location": "Wembley",
+      "rating": "5"
+    },
+    {
+      "id": 12,
+      "name": "Booked Hotel",
+      "description": "A hotel that never seems to have any free rooms.",
+      "location": "Harrow",
+      "rating": "1"
+    },
+    {
+      "id": 13,
+      "name": "Rubber Duck Hotel",
+      "description": "A hotel where you must wear a rubber duck suit at all times.",
+      "location": "Enfield",
+      "rating": "2"
+    },
+    {
+      "id": 14,
+      "name": "Developer Hotel",
+      "description": "A hotel only for devs, 101101!",
+      "location": "Moorgate",
+      "rating": "5"
+    },
+    {
+      "id": 15,
+      "name": "Pizza Hotel",
+      "description": "A hotel with free pizza.",
+      "location": "Thurrock",
+      "rating": "4"
+    },
+    {
+      "id": 16,
+      "name": "Stick Hotel",
+      "description": "A hotel made of sticks.",
+      "location": "Tower Gateway",
+      "rating": "1"
+    },
+    {
+      "id": 17,
+      "name": "Empty Hotel",
+      "description": "There's never anyone here for some reason.",
+      "location": "Hayes",
+      "rating": "1"
+    },
+    {
+      "id": 18,
+      "name": "Kings Hotel",
+      "description": "A hotel fit for a king.",
+      "location": "Buckinghamshire",
+      "rating": "5"
+    },
+    {
+      "id": 19,
+      "name": "Nameless Hotel",
+      "description": "For some reason the owners couldn't come up with a name for this hotel.",
+      "location": "Bow",
+      "rating": "3"
+    },
+    {
+      "id": 20,
+      "name": "Expensive Hotel",
+      "description": "A very costly hotel but fairly nice.",
+      "location": "Liverpool Street",
+      "rating": "4"
     }
   ]
 }
