@@ -60,10 +60,6 @@ export class Search extends Component {
         );
     }
 
-    action() {
-        alert("LOL");
-    }
-
     constructor(props) {
         super(props);
         this.state = {
