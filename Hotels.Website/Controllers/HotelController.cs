@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hotels.Core.Contracts.Services;
+using Hotels.Core.Enums;
 using Hotels.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,26 +16,26 @@ namespace Hotels.Website.Controllers
 
         // GET: api/hotels
         /// <summary>
-        /// Gets all hotels.
+        /// Gets all <see cref="Hotels"/>s.
         /// </summary>
         /// <returns></returns>
         [HttpGet("hotels")]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetAllAsync() => Ok(await _hotelService.GetAllAsync());
 
-        // GET: api/hotels/id
-        /// <summary>
-        /// Gets hotel with id.
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("hotels/{id}")]
-        public async Task<ActionResult<Hotel>> GetByIdAsync(int id) => Ok(await _hotelService.GetByIdAsync(id));
-
         // GET: api/hotels/name
         /// <summary>
-        /// Gets list of hotels with matching name.
+        /// Gets list of <see cref="Hotel"/>s with matching name.
         /// </summary>
         /// <returns></returns>
         [HttpGet("hotels/name/{name}")]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetListByMatchAsync(string name) => Ok(await _hotelService.GetListByMatchAsync(name));
+
+        // GET: api/hotels/rating
+        /// <summary>
+        /// Get list of <see cref="Hotel"/>s by <see cref="Rating"/>.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("hotels/rating/{rating}")]
+        public async Task<ActionResult<Hotel>> GetListByIdAsync(int rating) => Ok(await _hotelService.GetListByRatingAsync((Rating)rating));
     }
 }

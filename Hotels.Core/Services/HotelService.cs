@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Hotels.Core.Contracts.Repositories;
 using Hotels.Core.Contracts.Services;
+using Hotels.Core.Enums;
 using Hotels.Core.Models;
 
 namespace Hotels.Core.Services
@@ -20,9 +21,9 @@ namespace Hotels.Core.Services
         public async Task<IEnumerable<Hotel>> GetAllAsync() => await _hotelRepository.GetAllAsync();
 
         /// <inheritdoc />
-        public async Task<Hotel> GetByIdAsync(int id) => await _hotelRepository.GetByIdAsync(id);
+        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) => await _hotelRepository.GetListByMatchAsync(name);
 
         /// <inheritdoc />
-        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) => await _hotelRepository.GetListByMatchAsync(name);
+        public async Task<IEnumerable<Hotel>> GetListByRatingAsync(Rating rating) => await _hotelRepository.GetListByRatingAsync(rating);
     }
 }

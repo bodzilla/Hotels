@@ -19,11 +19,11 @@
       "name": "Rubber Chicken Hotel",
       "description": "A hotel where you must wear a rubber chicken suit at all times.",
       "location": "Enfield",
-      "rating": "1"
+      "rating": "2"
     },
     {
       "id": 4,
-      "name": "Pirate Hotels",
+      "name": "Pirate Hotel",
       "description": "A hotel only for pirates, arr!",
       "location": "Southend",
       "rating": "4"
@@ -33,6 +33,41 @@
       "name": "Ghost Hotel",
       "description": "A haunted hotel.",
       "location": "Gravesend",
+      "rating": "3"
+    },
+    {
+      "id": 6,
+      "name": "Standard Hotel",
+      "description": "It's pretty standard.",
+      "location": "Strand",
+      "rating": "3"
+    },
+    {
+      "id": 7,
+      "name": "Apple Hotel",
+      "description": "People in this hotel are obsessed with fruits.",
+      "location": "Essex",
+      "rating": "2"
+    },
+    {
+      "id": 8,
+      "name": "Palace Hotel",
+      "description": "A palace style hotel.",
+      "location": "Buckinghamshire",
+      "rating": "5"
+    },
+    {
+      "id": 9,
+      "name": "Movie Hotel",
+      "description": "A hotel built specially for movie shoots.",
+      "location": "Greenwich",
+      "rating": "4"
+    },
+    {
+      "id": 10,
+      "name": "Tall Hotel",
+      "description": "A very tall hotel, but nothing inside it.",
+      "location": "Moorgate",
       "rating": "1"
     }
   ]

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Hotels.Core.Contracts.Repositories;
+using Hotels.Core.Enums;
 using Hotels.Core.Models;
 using Newtonsoft.Json.Linq;
 
@@ -24,11 +25,11 @@ namespace Hotels.Persistence.Repositories
             await Task.Run(() => Hotels.Select(x => x.ToObject<Hotel>()));
 
         /// <inheritdoc />
-        public async Task<Hotel> GetByIdAsync(int id) =>
-            await GetAllAsync().ContinueWith(x => x.Result.FirstOrDefault(y => y.Id == id));
+        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) =>
+            await GetAllAsync().ContinueWith(x => x.Result.Where(y => y.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase)));
 
         /// <inheritdoc />
-        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) =>
-            await GetAllAsync().ContinueWith(x => x.Result.Where(y => y.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase)).ToList());
+        public async Task<IEnumerable<Hotel>> GetListByRatingAsync(Rating rating) =>
+            await GetAllAsync().ContinueWith(x => x.Result.Where(y => y.Rating == rating));
     }
 }
