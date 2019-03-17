@@ -13,16 +13,13 @@ namespace Hotels.Persistence.Repositories
     /// <inheritdoc />
     public sealed class HotelRepository : IHotelRepository
     {
-        /// <summary>
-        /// The hotel data.
-        /// </summary>
-        private IEnumerable<JToken> Hotels { get; }
+        private readonly string _dataSource;
 
-        public HotelRepository(string dataSource) => Hotels = JObject.Parse(File.ReadAllText(dataSource))["hotels"].ToList();
+        public HotelRepository(string dataSource) => _dataSource = dataSource;
 
         /// <inheritdoc />
         public async Task<IEnumerable<Hotel>> GetAllAsync() =>
-            await Task.Run(() => Hotels.Select(x => x.ToObject<Hotel>()));
+            await Task.Run(() => JObject.Parse(File.ReadAllText(_dataSource))["hotels"].ToList().Select(x => x.ToObject<Hotel>()));
 
         /// <inheritdoc />
         public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) =>
