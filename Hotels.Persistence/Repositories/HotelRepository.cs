@@ -20,10 +20,10 @@ namespace Hotels.Persistence.Repositories
 
         /// <inheritdoc />
         public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) =>
-            await Task.Run(() => _hotels.Where(y => y.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase)));
+            await Task.Run(() => _hotels.Where(x => x.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase)));
 
         /// <inheritdoc />
         public async Task<IEnumerable<Hotel>> GetListByRatingAsync(Rating rating) =>
-            await Task.Run(() => _hotels.Where(y => y.Rating == rating));
+            await Task.Run(() => _hotels.Where(x => x.Rating == rating));
     }
 }
