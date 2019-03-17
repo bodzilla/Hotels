@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Hotels.Core.Contracts.Repositories;
 using Hotels.Core.Enums;
 using Hotels.Core.Models;
-using Moq;
+using Hotels.Persistence.Repositories;
 using NUnit.Framework;
 
 namespace Hotels.UnitTests.Repositories
@@ -12,30 +12,23 @@ namespace Hotels.UnitTests.Repositories
     [TestFixture]
     public class HotelRepositoryTests
     {
-        private Mock<IHotelRepository> _hotelRepositoryMock;
         private IHotelRepository _hotelRepository;
 
-        [SetUp]
-        public void Setup()
-        {
-            // Set up and assign mocks.
-            _hotelRepositoryMock = new Mock<IHotelRepository>();
-            _hotelRepository = _hotelRepositoryMock.Object;
-        }
-
         [Test]
-        public async Task GetAllAsync_GetAllHotelsAsync_ReturnsThreeHotels()
+        public async Task GetAllAsync_GetAllHotelsAsync_ReturnsFiveHotels()
         {
             // Set up sample data.
             var data = new List<Hotel>
             {
-                new Hotel{Id = 1, Name = "Name1", Description = "Description1", Location = "Location1", Rating = Rating.Five},
-                new Hotel{Id = 2, Name = "Name2", Description = "Description2", Location = "Location2", Rating = Rating.Three},
-                new Hotel{Id = 3, Name = "Name3", Description = "Description3", Location = "Location3", Rating = Rating.One}
+                new Hotel{Id = 1, Name = "Test", Description = "Description1", Location = "Location1", Rating = Rating.Five},
+                new Hotel{Id = 2, Name = "Testing", Description = "Description2", Location = "Location2", Rating = Rating.Three},
+                new Hotel{Id = 3, Name = "Example", Description = "Description2", Location = "Location2", Rating = Rating.Two},
+                new Hotel{Id = 4, Name = "Mocks", Description = "Description2", Location = "Location2", Rating = Rating.One},
+                new Hotel{Id = 5, Name = "Units", Description = "Description2", Location = "Location2", Rating = Rating.One},
             };
 
-            // Ensure this method returns the sample data.
-            _hotelRepositoryMock.Setup(x => x.GetAllAsync()).ReturnsAsync(data);
+            // Initialise and assign the dataset.
+            _hotelRepository = new HotelRepository(data);
 
             var result = await _hotelRepository.GetAllAsync();
 
@@ -43,7 +36,61 @@ namespace Hotels.UnitTests.Repositories
             var hotels = result.ToList();
 
             Assert.That(hotels, Is.TypeOf<List<Hotel>>());
-            Assert.That(hotels.Count, Is.EqualTo(3));
+            Assert.That(hotels.Count, Is.EqualTo(5));
+        }
+
+        [TestCase("Test", "X", 4)]
+        [TestCase("Hotel", "X", 4)]
+        [TestCase("Name", "X", 4)]
+        public async Task GetListByMatchAsync_GetHotelListByMatchingNameAsync_ReturnsMatchingHotels(string name, string nonMatch, int matches)
+        {
+            // Set up sample data.
+            var data = new List<Hotel>
+            {
+                new Hotel{Id = 1, Name = $"{name}", Description = "Description2", Location = "Location2", Rating = Rating.Two},
+                new Hotel{Id = 2, Name = $"{name.ToUpper()}", Description = "Description1", Location = "Location1", Rating = Rating.Five},
+                new Hotel{Id = 3, Name = $"{name.ToLower()}", Description = "Description2", Location = "Location2", Rating = Rating.Three},
+                new Hotel{Id = 4, Name = $"{name} {nonMatch}", Description = "Description2", Location = "Location2", Rating = Rating.One},
+                new Hotel{Id = 5, Name = nonMatch, Description = "Description2", Location = "Location2", Rating = Rating.One},
+            };
+
+            // Initialise and assign the dataset.
+            _hotelRepository = new HotelRepository(data);
+
+            var result = await _hotelRepository.GetListByMatchAsync(name);
+
+            // Cast to list to make assertions.
+            var hotels = result.ToList();
+
+            Assert.That(hotels, Is.TypeOf<List<Hotel>>());
+            Assert.That(hotels.Count, Is.EqualTo(matches));
+        }
+
+        [TestCase(5, 3, 4)]
+        [TestCase(3, 1, 4)]
+        [TestCase(1, 5, 4)]
+        public async Task GetListByRatingAsync_GetHotelListByRatingAsync_ReturnsMatchingHotels(Rating match, Rating nonMatch, int matches)
+        {
+            // Set up sample data.
+            var data = new List<Hotel>
+            {
+                new Hotel{Id = 1, Name = "Test", Description = "Description2", Location = "Location2", Rating = match},
+                new Hotel{Id = 2, Name = "Testing", Description = "Description1", Location = "Location1", Rating = match},
+                new Hotel{Id = 3, Name = "Example", Description = "Description2", Location = "Location2", Rating = match},
+                new Hotel{Id = 4, Name = "Mocks", Description = "Description2", Location = "Location2", Rating = match},
+                new Hotel{Id = 5, Name = "Units", Description= "Description2", Location = "Location2", Rating = nonMatch},
+            };
+
+            // Initialise and assign the dataset.
+            _hotelRepository = new HotelRepository(data);
+
+            var result = await _hotelRepository.GetListByRatingAsync(match);
+
+            // Cast to list to make assertions.
+            var hotels = result.ToList();
+
+            Assert.That(hotels, Is.TypeOf<List<Hotel>>());
+            Assert.That(hotels.Count, Is.EqualTo(matches));
         }
     }
 }

@@ -1,5 +1,8 @@
+using System.IO;
+using System.Linq;
 using Hotels.Core.Contracts.Repositories;
 using Hotels.Core.Contracts.Services;
+using Hotels.Core.Models;
 using Hotels.Core.Services;
 using Hotels.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
 
 namespace Hotels.Website
 {
@@ -20,10 +24,11 @@ namespace Hotels.Website
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var hotelData = JObject.Parse(File.ReadAllText(Configuration.GetSection("applicationSettings").GetSection("dataSource").Value))["hotels"]
+                    .ToList().Select(x => x.ToObject<Hotel>());
+
             // Wire up DI.
-            services.AddScoped<IHotelRepository, HotelRepository>(x => new HotelRepository(
-                Configuration.GetSection("applicationSettings").GetSection("dataSource").Value)
-            );
+            services.AddScoped<IHotelRepository, HotelRepository>(x => new HotelRepository(hotelData));
             services.AddScoped<IHotelService, HotelService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
