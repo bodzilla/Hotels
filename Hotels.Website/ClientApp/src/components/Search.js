@@ -30,7 +30,7 @@ export class Search extends Component {
         this.setState({ ratingSort: 0 });
 
         // If the value is empty, return all hotels, otherwise search the given terms.
-        if (!event.target.value) {
+        if (!event.target.value.trim()) {
             fetch('api/hotels')
                 .then(response => response.json())
                 .then(data => { this.setState({ hotels: data }); }

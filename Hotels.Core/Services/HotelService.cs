@@ -21,7 +21,11 @@ namespace Hotels.Core.Services
         public async Task<IEnumerable<Hotel>> GetAllAsync() => await _hotelRepository.GetAllAsync();
 
         /// <inheritdoc />
-        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name) => await _hotelRepository.GetListByMatchAsync(name);
+        public async Task<IEnumerable<Hotel>> GetListByMatchAsync(string name)
+        {
+            // Trim the string so characters can be correctly matched.
+            return await _hotelRepository.GetListByMatchAsync(name.Trim());
+        }
 
         /// <inheritdoc />
         public async Task<IEnumerable<Hotel>> GetListByRatingAsync(Rating rating) => await _hotelRepository.GetListByRatingAsync(rating);
